@@ -1,0 +1,11 @@
+https://www.codejava.net/java-ee/web-services/how-to-code-and-deploy-java-xml-web-services-jax-ws-on-tomcat
+
+
+http://localhost:8080/02-HelloSOAP/ws/hello
+
+
+set JAVA_HOME="C:\Program Files\Java\jdk1.8.0_333"
+set path=%JAVA_HOME%\bin
+wsimport -keep -p com.training.soap.client http://localhost:8080/02-HelloSOAP/ws/hello?wsdl
+
+https://repo1.maven.org/maven2/com/sun/xml/ws/jaxws-ri/2.3.0/

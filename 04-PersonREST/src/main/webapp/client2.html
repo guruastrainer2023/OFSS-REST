@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script>
+function fetch(){
+	let xhr = new XMLHttpRequest();
+	
+	var idinputValue=document.forms[0].idtxt.value;
+
+	let url = "http://localhost:8080/04-PersonREST/rest/personapi/getPerson/"+idinputValue;
+
+	xhr.open("GET", url, true);
+
+	xhr.send();
+
+	xhr.onload = function(){ 
+			alert(xhr.responseText);
+			var data=xhr.responseText;
+			alert(data)
+			var emp=JSON.parse(data);
+			
+		    console.log(per)
+			document.getElementById("output1").innerText=per.id;	
+			document.getElementById("output2").innerText=per.name;
+			document.getElementById("output3").innerText=per.salary;
+	}
+}
+</script>
+</head>
+<body>
+
+<table border="1">
+	<tr>
+		<td>ID</td>
+		<td id="output1"></td>
+	</tr>
+	
+	<tr>
+		<td>Name</td>
+		<td id="output2"></td>
+	</tr>
+	
+	<tr>
+		<td>Salary</td>
+		<td id="output3"></td>
+	</tr>
+</table>
+
+<form onsubmit="fetch(); return false">
+	<label>ID</label>
+	<input name="idtxt">
+	<br>
+	
+	<input type="submit" value="FETCH">
+</form>
+</body>
+</html>

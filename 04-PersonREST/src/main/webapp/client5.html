@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+
+<script>
+	function updatePerson() {
+
+		var idinputValue = document.forms[0].pid.value;
+		var nameinputValue = document.forms[0].pname.value;
+		var salaryinputValue = document.forms[0].psal.value;
+
+		var person = {
+			"id" : idinputValue,
+			"name":nameinputValue,
+			"salary":salaryinputValue
+		}
+		alert(person);
+		alert(JSON.stringify(person))
+
+		let xhr = new XMLHttpRequest();
+
+		let url = "http://localhost:8080/04-PersonREST/rest/personapi/update";
+
+		xhr.open("PUT", url, true);
+
+		xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
+		xhr.setRequestHeader("Accept", "application/json");
+
+		
+
+		
+
+		xhr.send(JSON.stringify(person));
+		
+		xhr.onload = function() {
+			alert(xhr.responseText);
+			var data = xhr.responseText;
+			//alert(data)
+			var personArr = JSON.parse(data);
+			console.log(personArr)
+			alert(personArr.length)
+			document.write("<table border='1'>");
+			for (i = 0; i < personArr.length; i++) {
+				document.write("<tr>");
+				document.write("<td>")
+				document.write(personArr[i].id);
+				document.write("</td>")
+
+				document.write("<td>")
+				document.write(personArr[i].name);
+				document.write("</td>")
+
+				document.write("<td>")
+				document.write(personArr[i].salary);
+				document.write("</td>")
+
+				document.write("</tr>");
+			}
+
+			document.write("</tr>")
+		}
+	}
+</script>
+<body>
+<form onsubmit="updatePerson(); return false">
+	ID <input name="pid">
+	<br>
+	
+	Name <input name="pname">
+	<br>
+	
+	Salary <input name="psal">
+	<br>
+	
+	<input type="submit">
+</form>
+</body>
+</html>
